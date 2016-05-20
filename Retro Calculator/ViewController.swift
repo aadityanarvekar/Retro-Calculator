@@ -12,6 +12,7 @@ import AVFoundation
 class ViewController: UIViewController {
     
     
+    @IBOutlet weak var signSymbol: UILabel!
     @IBOutlet weak var answerLabel: UILabel!
     var btnSound: AVAudioPlayer!
     var num: Double = 0
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberPressed(btn: UIButton) {
-        btnSound.play()
+        playSound()
         
         if btn.tag < 10 {
             num = num * 10 + Double(btn.tag)
@@ -54,29 +55,34 @@ class ViewController: UIViewController {
             updateResult()
             performAddition = true
             answerLabel.text = String(result)
+            signSymbol.text = "+"
         }
         
         if btn.tag == 11 { // Subtraction
             updateResult()
             performSubtraction = true
             answerLabel.text = String(result)
+            signSymbol.text = "-"
         }
         
         if btn.tag == 12 { // Multiplication
             updateResult()
             performMultiplication = true
             answerLabel.text = String(result)
+            signSymbol.text = "x"
         }
         
         if btn.tag == 13 { // Division
             updateResult()
             performDivision = true
             answerLabel.text = String(result)
+            signSymbol.text = "/"
         }
         
         if btn.tag == 14 { // Equals
             updateResult()
             answerLabel.text = String(result)
+            signSymbol.text = ""
         }
         
     }
@@ -108,6 +114,14 @@ class ViewController: UIViewController {
             result = Double(answerLabel.text!)!
             num = 0
         }
+    }
+    
+    func playSound() {
+        if btnSound.playing {
+            btnSound.stop()
+        }
+        
+        btnSound.play()
     }
 
 }
