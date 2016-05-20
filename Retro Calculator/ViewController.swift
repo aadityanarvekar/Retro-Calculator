@@ -88,6 +88,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func resetCalculator(sender: UIButton) {
+        playSound()
         result = 0
         num = 0
         answerLabel.text = "0.0"
